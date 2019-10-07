@@ -9,10 +9,12 @@ budget_data = os.path.join("Resources","budget_data.csv")
 months = 0
 net_income = 0
 avg_change = 0
-greast_increse = 0
+last_month = 0
+monthly_change = 0
+greatest_increase = 0
 greatest_decrease = 0
 
-#Read dataset
+#Access dataset
 with open(budget_data, newline="") as budget_data_file:
     budget_data_reader = csv.reader(budget_data_file, delimiter=",")
 
@@ -22,30 +24,36 @@ with open(budget_data, newline="") as budget_data_file:
     #Read through each row
     for row in budget_data_reader:
 
-#The dataset is composed of two columns: `Date` and `Profit/Losses`. (Thankfully, your company has rather lax standards for accounting so the records are simple.)
+        #Update months
+        months += 1 
 
-#  * The total number of months included in the dataset
+        #Update net_income 
+        net_income += int(row[1])
 
-#  * The net total amount of "Profit/Losses" over the entire period
+        #Update monthly_change
+        monthly_change = int(row[1]) - last_month
+        last_month = int(row[1])
+        #Tracking for avg_change
+        total_change += monthly_change
 
-#  * The average of the changes in "Profit/Losses" over the entire period
+        #Check greatest values
+        if monthly_change > greatest_increase:
+            greatest_increase = monthly_change
+            greatest_increase_date = row[0]
 
-#  * The greatest increase in profits (date and amount) over the entire period
+        if monthly_change < greatest_decrease:
+            greatest_decrease = monthly_change
+            greatest_decrease_date = row[0]
 
-#  * The greatest decrease in losses (date and amount) over the entire period
 
-
+avg_change = total_change/months
   
-
-
-
 # print the analysis to the terminal 
-
 print ("Financial Analysis")
 print ("----------------------------")
-print ("Total Months: ")
-print ("Total: ")
-print ("Average Change: ")
+print ("Total Months: " + str(months))
+print ("Total: $" + str(net_income))
+print ("Average Change: $"+str(avg_change))
 print ("Greatest Increase in Profits: ")
 print ("Greatest Decrease in Profits: ")
 
