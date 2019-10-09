@@ -3,13 +3,11 @@
 import os
 import csv
 
-#Join dataset file (assumes file is in Resources subfolder)
-election_data = os.path.join("Resources","election_data.csv")
+#Join dataset file 
+election_data = os.path.join("election_data.csv")
 
 #Create variables and lists to tack results
 votes_total = 0
-
-#Create candidate related lists
 candidates_list = []
 candidates_votes = []
 votes_percent = []
@@ -18,7 +16,6 @@ votes_round = []
 #Access dataset to identify candidates and do overall vote count
 with open(election_data, newline="") as election_data_file:
     election_data_reader = csv.reader(election_data_file, delimiter=",")
-
     #Skip header row
     header = next(election_data_file)
 
@@ -38,11 +35,10 @@ with open(election_data, newline="") as election_data_file:
 #Access dataset second time to get votes per candidate
 with open(election_data, newline="") as election_data_file:
     election_data_reader = csv.reader(election_data_file, delimiter=",")
-
     #Skip header row
     header = next(election_data_file)
     
-    #get vote counts per candidate
+    #Get vote counts per candidate
     for row_two in election_data_reader:
         for i in range(len(candidates_list)):
             if candidates_list[i] ==row_two[2]:
@@ -52,15 +48,14 @@ with open(election_data, newline="") as election_data_file:
 #Populate winner variables with first candidate for comparing votes
 winner = candidates_list[0]
 win_votes = candidates_votes[0]
-
-#Compare votes one at a time
+#Compare votes one candidate at a time
 for j in range(len(candidates_list)):
     if candidates_votes[j] > win_votes:
         #Update winner variables
         winner = candidates_list[j]
         win_votes = candidates_votes[j]
 
-# Calculate candidate vote perecent and get 3 decimal points (round doesn't work here)
+#Calculate candidate vote perecent and get 3 decimal points 
 for k in range (len(candidates_votes)):
     votes_percent[k] = (candidates_votes[k]/votes_total)*100
     votes_percent[k] = '%.3f' % votes_percent[k] 
