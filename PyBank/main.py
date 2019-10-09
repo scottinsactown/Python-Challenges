@@ -4,7 +4,7 @@ import os
 import csv
 
 #Join dataset file (assumes file is in Resources subfolder)
-budget_data = os.path.join("Resources","budget_data.csv")
+budget_data = os.path.join("budget_data.csv")
 
 #Create variables to process results
 months = 0
@@ -19,7 +19,6 @@ greatest_decrease = 0
 #Access dataset
 with open(budget_data, newline="") as budget_data_file:
     budget_data_reader = csv.reader(budget_data_file, delimiter=",")
-
     #Skip header row
     header = next(budget_data_file)
 
