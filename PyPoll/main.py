@@ -1,10 +1,9 @@
 #This is for PyPoll
 #Import modules
-import os
 import csv
 
 #Join dataset file 
-election_data = os.path.join("election_data.csv")
+election_data = "election_data.csv"
 
 #Create variables and lists to tack results
 votes_total = 0
@@ -48,6 +47,7 @@ with open(election_data, newline="") as election_data_file:
 #Populate winner variables with first candidate for comparing votes
 winner = candidates_list[0]
 win_votes = candidates_votes[0]
+
 #Compare votes one candidate at a time
 for j in range(len(candidates_list)):
     if candidates_votes[j] > win_votes:
@@ -63,10 +63,10 @@ for k in range (len(candidates_votes)):
 #Print the analysis to the terminal
 print ("\nElection Results")
 print ("-------------------------")
-print ("Total Votes: " + str(votes_total))
+print (f"Total Votes: {votes_total}")
 print ("-------------------------")
 for l in range(len(candidates_list)):
-    print(candidates_list[l] + ":  " + str(votes_percent[l]) + "% (" + str(candidates_votes[l]) + ")") 
+    print(f"{candidates_list[l]}:  {votes_percent[l]}% ({candidates_votes[l]})") 
 print ("-------------------------")
 print ("Winner: " + winner)
 print ("-------------------------")
